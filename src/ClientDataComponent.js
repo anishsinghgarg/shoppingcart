@@ -24,7 +24,7 @@ const ClientDataComponent = () => (
                 <Table.Cell>9661188221</Table.Cell>
                 <Table.Cell><Button basic color='blue' content='Regi' /></Table.Cell>
                 <Table.Cell>
-<Button basic color='blue'><i class="edit icon"></i></Button><Button basic color='red'><i class="delete icon"></i></Button>
+<Button basic color='blue'><i className="edit icon"></i></Button><Button basic color='red'><i className="delete icon"></i></Button>
                    
                 </Table.Cell>
             </Table.Row>
