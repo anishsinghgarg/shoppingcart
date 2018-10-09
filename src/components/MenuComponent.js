@@ -18,8 +18,12 @@ export default class MenuComponent extends Component {
     //handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
     handleItemClick(event) {
-     const {id} = event.target;
-        console.log(id);
+        console.log(' event is herre'+event);
+         const {id} = event.target;
+        console.log(' event is id' +id);
+
+        const {name} = event.target;
+        console.log(' event is name' +name);
      this.setState({ activeItem: id });
     }
     render() {
