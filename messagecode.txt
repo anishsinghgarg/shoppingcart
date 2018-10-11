@@ -14,7 +14,7 @@ function sendSMS() {
 var mobile_no = document.getElementById('mobileno').value;
 var message="Jo V Message Vejna hai";
 
-if(mobile_no=''){
+if(mobile_no==''){
         alert('Enter Valid Mobile No');
         return false;
 }
