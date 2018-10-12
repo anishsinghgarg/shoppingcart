@@ -1,56 +1,67 @@
 import React, { Component } from 'react';
-import { Icon, Label, Menu, Table, Button,Header } from 'semantic-ui-react';
+import { Icon, Label, Menu, Table, Button, Header } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
 import UserList from './UserDataDetails'
 
-import { fetchAllUsers } from "../actions/userAction"
+import { fetchAllUsers, updateUser } from "../actions/userAction"
 
 class ClientDataComponent extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            users: { users: props.users },
+            user: {}
+        }
+    }
     componentDidMount() {
         this.props.fetchAllUsers();
-
     }
+
+    toggelStatus = (e) => {
+          e.preventDefault();
+        alert("Name ::" + e.target.name + " | Value ::" + e.target.value);
+        // this.setState({data:this.state.issues[index].complete = true});
+        let rid = e.target.value;
+        let activeCode = e.target.name;
+        activeCode = activeCode == 'N' ? 'Y' : 'N';
+        // setUserSelectedState(e.target.value);
+        this.setState({
+            data: this.state.user =
+            this.props.users.find((element) => {
+                return element.customerId === parseInt(rid);
+            })
+        });
+        this.setState({data:this.state.user.isActive=activeCode});
+alert("Got The Individual Object ::" + JSON.stringify(this.state.user));
+
+        this.props.dispatch(updateUser(this.state.user));
+
+        // alert("Got The Individual Object ::" + JSON.stringify(this.state.user));
+    }
+
 
     render() {
 
         return (
             <div>
-                <Header as='h2' textAlign='center' style={{ fontSize: "3em", fontFamily: '-webkit-pictograph' }}>List of Users</Header>
-              
-                <Table celled>
-                    <Table.Header>
-                        <Table.Row>
-                            <Table.HeaderCell>SNo</Table.HeaderCell>
-                            <Table.HeaderCell>Name</Table.HeaderCell>
-                            <Table.HeaderCell>Inamge</Table.HeaderCell>
-                            <Table.HeaderCell>Email</Table.HeaderCell>
-                            <Table.HeaderCell>Contact</Table.HeaderCell>
-                            <Table.HeaderCell>Status</Table.HeaderCell>
-                            <Table.HeaderCell>Operation</Table.HeaderCell>
-                        </Table.Row>
-                    </Table.Header>
-                    <UserList users={this.props.users} />
-
-                    <Table.Footer>
-                        <Table.Row>
-                            <Table.HeaderCell colSpan='7'>
-                                <Menu floated='right' pagination>
-                                    <Menu.Item as='a' icon>
-                                        <Icon name='chevron left' />
-                                    </Menu.Item>
-                                    <Menu.Item as='a'>1</Menu.Item>
-                                    <Menu.Item as='a'>2</Menu.Item>
-                                    <Menu.Item as='a'>3</Menu.Item>
-                                    <Menu.Item as='a'>4</Menu.Item>
-                                    <Menu.Item as='a' icon>
-                                        <Icon name='chevron right' />
-                                    </Menu.Item>
-                                </Menu>
-                            </Table.HeaderCell>
-                        </Table.Row>
-                    </Table.Footer>
-                </Table>
+                <h2 className="ui horizontal divider header" style={{ fontSize: "1em", fontFamily: '-webkit-pictograph' }}>
+                    <i className="user icon"></i>
+                    List of Users</h2>
+                <table id="example" class="ui celled table" style={{ width: "100%" }}>
+                    <thead>
+                        <tr>
+                            <th>SNo</th>
+                            <th>Name</th>
+                            <th>Inamge</th>
+                            <th>Email</th>
+                            <th>Contact</th>
+                            <th>Status</th>
+                            <th>Operation</th>
+                        </tr>
+                    </thead>
+                    <UserList key={this.props.users} users={this.props.users} myClick={this.toggelStatus} />
+                </table>
             </div>
         )
     }
@@ -62,8 +73,10 @@ function mapStateToProps(state, ownProps) {
         };
     } else {
         return {
-            users: [{ customerId: 420, customerName: '', customerContactNo: '', customerEmail: '', isActive: '', createdDate: '' }]
+            users: [{ customerId: 420, customerName: 'ABC', customerContactNo: '', customerEmail: '', isActive: '', createdDate: '' }, { customerId: 421, customerName: 'XYZ', customerContactNo: '', customerEmail: '', isActive: '', createdDate: '' }]
         }
     }
 }
-export default connect(mapStateToProps, { fetchAllUsers })(ClientDataComponent);
+function mapDispatchToProps() {
+}
+export default connect(mapStateToProps, { fetchAllUsers,updateUser })(ClientDataComponent);

@@ -10,9 +10,7 @@ class App extends Component {
     return (
       <div>
         <HeaderMenuComponent />
-        <hr />
         <MenuComponent />
-        <hr />
         <FooterComponent />
       </div>
     );

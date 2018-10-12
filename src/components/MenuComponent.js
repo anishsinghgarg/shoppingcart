@@ -5,26 +5,26 @@ import { Menu, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 import SerchButtonComponent from './SerchButtonComponent';
-import AddNewButtonComponent from './AddNewButtonComponent';
+import AddNewUserComponent from './AddNewUserComponent';
 import ClientDataComponent from './ClientDataComponent';
 import HomeContainer from './HomeContainer';
 
 export default class MenuComponent extends Component {
     constructor(props) {
-    super(props);
-    this.state = { activeItem: 'home' }
-     this.handleItemClick=this.handleItemClick.bind(this);
+        super(props);
+        this.state = { activeItem: 'home' }
+        this.handleItemClick = this.handleItemClick.bind(this);
     }
     //handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
     handleItemClick(event) {
         //console.log(' event is herre'+event);
-         const {id} = event.target;
-       // console.log(' event is id' +id);
+        const { id } = event.target;
+        // console.log(' event is id' +id);
 
-       // const {name} = event.target;
-      //  console.log(' event is name' +name);
-     this.setState({ activeItem: id });
+        // const {name} = event.target;
+        //  console.log(' event is name' +name);
+        this.setState({ activeItem: id });
     }
     render() {
         const { activeItem } = this.state
@@ -50,9 +50,9 @@ const HomeComponent = () => (
 const UserManagement = () => (
     <div>
         <hr />
-        <div className="right floated left aligned six wide column">
-            <AddNewButtonComponent />
-            <SerchButtonComponent />
+        <div className="ui one column grid container">
+          <AddNewUserComponent />
+            {/*<SerchButtonComponent />*/}
         </div>
         <ClientDataComponent />
     </div>
