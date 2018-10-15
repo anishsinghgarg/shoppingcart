@@ -67,8 +67,8 @@ export const updateUser = (user) => {
       .then((res) => {
         dispatch({type: UPDATE_USER, user: res.data});
       })
-  };
-}*/
+  };*/
+}
 
 
 export const updateUserSuccess = (user) => {

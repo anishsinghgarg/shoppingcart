@@ -73,7 +73,7 @@ function mapStateToProps(state, ownProps) {
         };
     } else {
         return {
-            users: [{ customerId: 420, customerName: 'ABC', customerContactNo: '', customerEmail: '', isActive: '', createdDate: '' }, { customerId: 421, customerName: 'XYZ', customerContactNo: '', customerEmail: '', isActive: '', createdDate: '' }]
+            users: [{ customerId: 420, customerName: 'ABC', customerContactNo: '', customerEmail: '', isActive: 'N', createdDate: '' }, { customerId: 421, customerName: 'XYZ', customerContactNo: '', customerEmail: '', isActive: 'Y', createdDate: '' }]
         }
     }
 }
