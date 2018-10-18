@@ -14,7 +14,17 @@ export default (state = {}, action) => {
             return action.users
         }
         case UPDATE_USER:
-            return state.setIn(['byCustomerId', action.user.customerId], action.user);
+           // return state.setIn(['byCustomerId', action.user.customerId], action.user);
+           return state.map((user) => {
+                if (user.customerId === action.user.customerId) {
+                    return {
+                        ...user,
+                        ...action.user
+                    };
+                } else {
+                    return user;
+                }
+            });
         default:
             return state;
     }

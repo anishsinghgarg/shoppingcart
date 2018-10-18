@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component,PropTypes, bindActionCreators  } from 'react';
 import { Icon, Label, Menu, Table, Button, Header } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-
+import $ from 'jquery';
 import UserList from './UserDataDetails'
 
 import { fetchAllUsers, updateUser } from "../actions/userAction"
@@ -9,6 +9,7 @@ import { fetchAllUsers, updateUser } from "../actions/userAction"
 class ClientDataComponent extends Component {
     constructor(props) {
         super(props);
+      
         this.state = {
             users: { users: props.users },
             user: {}
@@ -20,7 +21,7 @@ class ClientDataComponent extends Component {
 
     toggelStatus = (e) => {
           e.preventDefault();
-        alert("Name ::" + e.target.name + " | Value ::" + e.target.value);
+       // alert("Name ::" + e.target.name + " | Value ::" + e.target.value);
         // this.setState({data:this.state.issues[index].complete = true});
         let rid = e.target.value;
         let activeCode = e.target.name;
@@ -33,11 +34,8 @@ class ClientDataComponent extends Component {
             })
         });
         this.setState({data:this.state.user.isActive=activeCode});
-alert("Got The Individual Object ::" + JSON.stringify(this.state.user));
-
-        this.props.dispatch(updateUser(this.state.user));
-
-        // alert("Got The Individual Object ::" + JSON.stringify(this.state.user));
+        //alert("Got The Individual Object ::" + JSON.stringify(this.state.user));
+         updateUser(this.state.user);
     }
 
 
@@ -77,6 +75,8 @@ function mapStateToProps(state, ownProps) {
         }
     }
 }
-function mapDispatchToProps() {
+
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({updateUser, fetchAllUsers},dispatch); 
 }
-export default connect(mapStateToProps, { fetchAllUsers,updateUser })(ClientDataComponent);
+export default connect(mapStateToProps, {fetchAllUsers})(ClientDataComponent);

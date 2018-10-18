@@ -20,7 +20,7 @@ class UserList extends Component {
                             <td>Image {user.customerId}</td>
                             <td>{user.customerEmail}</td>
                             <td>{user.customerContactNo}</td>
-                            <td><Button basic value={user.customerId} name={user.isActive} onClick={myClick} color={user.isActive == 'Y' ?'blue':'red'} content={user.isActive == 'Y' ?'Reg':'Blocked'} /></td>
+                            <td><Button basic value={user.customerId} name={user.isActive} onClick={myClick.bind(this)} color={user.isActive == 'Y' ?'blue':'red'} content={user.isActive == 'Y' ?'Reg':'Blocked'} /></td>
                             <td>
                                 <Button basic color='blue'><i className="edit icon"></i></Button><Button basic color='red'><i className="delete icon"></i></Button>
                             </td>

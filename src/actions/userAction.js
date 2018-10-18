@@ -47,18 +47,11 @@ export const createUserSuccess = (user) => {
 };
 
 export const updateUser = (user) => {
-  return (dispatch) => {
-    return axios.post(URL+'update/'+user.customerId, user)
-      .then(response => {
-        dispatch(updateUserSuccess(response.data))
-      }).then(response => {
-        dispatch(fetchAllUsers())
-      })
-      .catch(error => {
+  return axios.put(URL+'update/', user).catch(error => {
         throw(error);
       });
-  };
 };
+
 
 {/*export function updateUser(user) {
   //console.log("Final Data ::::::",JSON.stringify(user));
