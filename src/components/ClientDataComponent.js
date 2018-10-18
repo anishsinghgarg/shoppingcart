@@ -1,15 +1,15 @@
-import React, { Component,PropTypes, bindActionCreators  } from 'react';
+import React, { Component, PropTypes, bindActionCreators } from 'react';
 import { Icon, Label, Menu, Table, Button, Header } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import $ from 'jquery';
 import UserList from './UserDataDetails'
 
-import { fetchAllUsers, updateUser } from "../actions/userAction"
+import { fetchAllUsers, updateUser, deleteUser } from "../actions/userAction"
 
 class ClientDataComponent extends Component {
     constructor(props) {
         super(props);
-      
+
         this.state = {
             users: { users: props.users },
             user: {}
@@ -20,22 +20,35 @@ class ClientDataComponent extends Component {
     }
 
     toggelStatus = (e) => {
-          e.preventDefault();
-       // alert("Name ::" + e.target.name + " | Value ::" + e.target.value);
+        e.preventDefault();
+        // alert("Name ::" + e.target.name + " | Value ::" + e.target.value);
         // this.setState({data:this.state.issues[index].complete = true});
         let rid = e.target.value;
         let activeCode = e.target.name;
-        activeCode = activeCode == 'N' ? 'Y' : 'N';
-        // setUserSelectedState(e.target.value);
+        let indexVal = e.target.title;
+       // alert("Got Name " + activeCode);
         this.setState({
             data: this.state.user =
             this.props.users.find((element) => {
                 return element.customerId === parseInt(rid);
             })
         });
-        this.setState({data:this.state.user.isActive=activeCode});
-        //alert("Got The Individual Object ::" + JSON.stringify(this.state.user));
-         updateUser(this.state.user);
+
+        if (activeCode === 'delete') {
+            // delete this.state.users[parseInt(indexVal)];
+            // this.setState({ users: this.state.users });
+            this.props.users.splice(parseInt(indexVal), 1);
+            this.setState({ data: this.state.users = this.state.users });
+            //lert(JSON.stringify(this.state.users));
+            deleteUser(this.state.user);
+        } else {
+            activeCode = activeCode == 'N' ? 'Y' : 'N';
+            this.setState({ data: this.state.user.isActive = activeCode });
+            updateUser(this.state.user);
+
+        }
+
+
     }
 
 
@@ -76,7 +89,7 @@ function mapStateToProps(state, ownProps) {
     }
 }
 
-function mapDispatchToProps(dispatch){
-    return bindActionCreators({updateUser, fetchAllUsers},dispatch); 
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ updateUser, fetchAllUsers }, dispatch);
 }
-export default connect(mapStateToProps, {fetchAllUsers})(ClientDataComponent);
+export default connect(mapStateToProps, { fetchAllUsers })(ClientDataComponent);

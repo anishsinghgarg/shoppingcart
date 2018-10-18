@@ -52,6 +52,12 @@ export const updateUser = (user) => {
       });
 };
 
+export const deleteUser = (user) => {
+  return axios.delete(URL+'delete/'+user.customerId).catch(error => {
+        throw(error);
+      });
+};
+
 
 {/*export function updateUser(user) {
   //console.log("Final Data ::::::",JSON.stringify(user));
